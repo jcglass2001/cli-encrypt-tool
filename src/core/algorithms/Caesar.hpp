@@ -2,7 +2,7 @@
 #include "../algorithm.hpp"
 #include <chrono>
 
-class Caesar : public Algorithm
+class Caesar : public AlgorithmBase
 {
     public :
         Caesar();

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "./core/algorithms/Caesar.hpp"
+#include "./core/algorithms/XOR.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -12,8 +13,20 @@ int main(int argc, char* argv[])
     std::string inputFile =  argv[3];
     std::string outputFile = argv[4];
 
-    Caesar caesar;
-    caesar.decrypt(inputFile,outputFile);
+    // Caesar caesar;
+    // caesar.encrypt(inputFile,outputFile);
+    // caesar.decrypt(inputFile,outputFile);
+
+    XOR xor_;
+
+    if(flag == "-e") {
+        xor_.encrypt(inputFile, outputFile);
+    } else {
+        xor_.decrypt(inputFile, outputFile);
+    }
+
+
+    
 
     return 0;
 }

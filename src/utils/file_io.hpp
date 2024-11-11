@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 std::string readFile(const std::string& filename);
-bool writeFile(const std::string& filename, const std::string& text);
+void writeFile(const std::string& filename, const std::string& text);

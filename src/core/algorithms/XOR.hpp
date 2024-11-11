@@ -4,7 +4,7 @@
 class XOR : public AlgorithmBase
 {
     private : 
-        std::string key;
+        char key[3];
     public : 
         XOR();
         ~XOR() override;

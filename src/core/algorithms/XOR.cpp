@@ -1,6 +1,6 @@
 #include "XOR.hpp"
 
-XOR::XOR() : key("mysecretkey") {}
+XOR::XOR() : key{'K','C','Q'} {}
 XOR::~XOR(){}
 
 void XOR::process(const std::string& inputFileName, const std::string& outputFileName)
@@ -9,7 +9,8 @@ void XOR::process(const std::string& inputFileName, const std::string& outputFil
     
     // encryption logic...
     for(size_t i = 0; i < text.length(); ++i) {
-            text[i] = static_cast<char>(text[i] ^ key[i % key.length()]);
+        if(text[i] == '\n') continue;
+        text[i] = static_cast<char>(text[i] ^ key[i % (sizeof(key) / sizeof(char))]);  
     }
     writeFile(outputFileName, text);
 }

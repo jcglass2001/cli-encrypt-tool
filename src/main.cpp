@@ -1,6 +1,5 @@
 #include <iostream>
-#include "./core/algorithms/Caesar.hpp"
-#include "./core/algorithms/XOR.hpp"
+#include "./core/factory/AlgorithmFactory.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -13,20 +12,18 @@ int main(int argc, char* argv[])
     std::string inputFile =  argv[3];
     std::string outputFile = argv[4];
 
-    // Caesar caesar;
-    // caesar.encrypt(inputFile,outputFile);
-    // caesar.decrypt(inputFile,outputFile);
-
-    XOR xor_;
-
-    if(flag == "-e") {
-        xor_.encrypt(inputFile, outputFile);
-    } else {
-        xor_.decrypt(inputFile, outputFile);
-    }
-
-
     
-
+    try {
+        auto cipher = AlgorithmFactory::createAlgorithm(algorithm);
+        if(flag == "-e") cipher->encrypt(inputFile,outputFile);
+        else if (flag == "-d") cipher->decrypt(inputFile,outputFile);
+        else {
+            std::cerr << "Unknown flag: " << flag << std::endl;
+            return 1;
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
     return 0;
 }

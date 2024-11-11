@@ -6,7 +6,7 @@ std::string readFile(const std::string& filename)
 {
     std::ifstream file(filename);
     if(!file.is_open()) {
-        std::cerr << "[ERROR] Failed to read from file..." << std::endl;
+        std::cerr << "[ERROR] Failed to read from file: " + filename << std::endl;
         exit(-1);
     }
 
@@ -17,12 +17,12 @@ std::string readFile(const std::string& filename)
     return buffer.str();
 }
 
-bool writeFile(const std::string& filename, const std::string& text)
+void writeFile(const std::string& filename, const std::string& text)
 {
     std::ofstream file(filename);
     if(!file.is_open()) {
-        std::cerr << "[ERROR] Failed to write to file..." << std::endl;
-        return -1;
+        std::cerr << "[ERROR] Failed to write to file: " + filename << std::endl;
+        exit(-1);
     }
 
     std::stringstream buffer;
@@ -30,5 +30,4 @@ bool writeFile(const std::string& filename, const std::string& text)
     file << buffer.str();
 
     file.close();
-    return true;
 }

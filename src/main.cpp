@@ -1,6 +1,11 @@
 #include <iostream>
+#include <memory>
 #include "./core/factory/AlgorithmFactory.hpp"
-
+#include "./core/algorithms/Caesar.hpp"
+void initRegistry(AlgorithmFactory& factory) 
+{
+    factory.registerAlgorithm("caesar", [](){ return std::make_unique<Caesar>(); });
+}
 int main(int argc, char* argv[])
 {
     if(argc != 5) {
@@ -14,12 +19,16 @@ int main(int argc, char* argv[])
 
     
     try {
-        auto cipher = AlgorithmFactory::createAlgorithm(algorithm);
-        if(flag == "-e") cipher->encrypt(inputFile,outputFile);
-        else if (flag == "-d") cipher->decrypt(inputFile,outputFile);
-        else {
-            std::cerr << "Unknown flag: " << flag << std::endl;
-            return 1;
+        AlgorithmFactory factory;
+        initRegistry(factory);
+        
+        auto cipher = factory.createAlgorithm(algorithm);
+        if(flag == "-e") {
+            cipher->encrypt(inputFile, outputFile);
+        } else if (flag == "-d") {
+            cipher->decrypt(inputFile, outputFile);
+        } else {
+            throw std::invalid_argument("Unknown flag: " + flag);
         }
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;

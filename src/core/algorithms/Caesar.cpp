@@ -1,7 +1,10 @@
 #include "Caesar.hpp"
+#include "../factory/AlgorithmFactory.hpp"
 
 Caesar::Caesar(){}
 Caesar::~Caesar(){}
+
+// bool Caesar::registered = AlgorithmFactory::registerAlgorithm("caesar", [](){ return std::make_unique<Caesar>();});
 
 void Caesar::encrypt(const std::string& inputFileName, const std::string& outputFileName)
 {

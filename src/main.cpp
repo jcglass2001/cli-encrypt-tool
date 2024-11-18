@@ -1,10 +1,17 @@
 #include <iostream>
+#include <memory>
 #include "./core/factory/AlgorithmFactory.hpp"
-
+#include "./core/algorithms/Caesar.hpp"
+#include "./core/algorithms/XOR.hpp"
+void initRegistry(AlgorithmFactory& factory) 
+{
+    factory.registerAlgorithm("caesar", [](){ return std::make_unique<Caesar>(); });
+    factory.registerAlgorithm("xor", [](){ return std::make_unique<XOR>(); });
+}
 int main(int argc, char* argv[])
 {
     if(argc != 5) {
-        std::cerr << "Usage: ./encrypt_tool <-e/-d> <algorithm> <input file> <output file>" << std::endl;
+        std::cerr << "Usage: ./cypher <-e/-d> <algorithm> <input file> <output file>" << std::endl;
         return 1;
     }
     std::string flag = argv[1];
@@ -14,12 +21,16 @@ int main(int argc, char* argv[])
 
     
     try {
-        auto cipher = AlgorithmFactory::createAlgorithm(algorithm);
-        if(flag == "-e") cipher->encrypt(inputFile,outputFile);
-        else if (flag == "-d") cipher->decrypt(inputFile,outputFile);
-        else {
-            std::cerr << "Unknown flag: " << flag << std::endl;
-            return 1;
+        AlgorithmFactory factory;
+        initRegistry(factory);
+        
+        auto cipher = factory.createAlgorithm(algorithm);
+        if(flag == "-e") {
+            cipher->encrypt(inputFile, outputFile);
+        } else if (flag == "-d") {
+            cipher->decrypt(inputFile, outputFile);
+        } else {
+            throw std::invalid_argument("Unknown flag: " + flag);
         }
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;

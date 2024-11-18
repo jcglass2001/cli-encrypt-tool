@@ -11,4 +11,5 @@ class Caesar : public AlgorithmBase
         void decrypt(const std::string& inputFileName, const std::string& outputFileName) override;
     private :
         int getShiftValue();
+        // static bool registered;
 };

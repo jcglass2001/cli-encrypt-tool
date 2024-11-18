@@ -2,14 +2,16 @@
 #include <memory>
 #include "./core/factory/AlgorithmFactory.hpp"
 #include "./core/algorithms/Caesar.hpp"
+#include "./core/algorithms/XOR.hpp"
 void initRegistry(AlgorithmFactory& factory) 
 {
     factory.registerAlgorithm("caesar", [](){ return std::make_unique<Caesar>(); });
+    factory.registerAlgorithm("xor", [](){ return std::make_unique<XOR>(); });
 }
 int main(int argc, char* argv[])
 {
     if(argc != 5) {
-        std::cerr << "Usage: ./encrypt_tool <-e/-d> <algorithm> <input file> <output file>" << std::endl;
+        std::cerr << "Usage: ./cypher <-e/-d> <algorithm> <input file> <output file>" << std::endl;
         return 1;
     }
     std::string flag = argv[1];

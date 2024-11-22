@@ -1,8 +1,8 @@
 #include <iostream>
 #include <memory>
-#include "./core/factory/AlgorithmFactory.hpp"
-#include "./core/algorithms/Caesar.hpp"
-#include "./core/algorithms/XOR.hpp"
+#include "./core/factory/algorithm_factory.hpp"
+#include "./core/algorithms/caesar.hpp"
+#include "./core/algorithms/xor.hpp"
 void initRegistry(AlgorithmFactory& factory) 
 {
     factory.registerAlgorithm("caesar", [](){ return std::make_unique<Caesar>(); });

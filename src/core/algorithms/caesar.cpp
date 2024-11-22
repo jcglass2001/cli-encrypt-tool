@@ -1,5 +1,5 @@
-#include "Caesar.hpp"
-#include "../factory/AlgorithmFactory.hpp"
+#include "caesar.hpp"
+#include "../factory/algorithm_factory.hpp"
 
 Caesar::Caesar(){}
 Caesar::~Caesar(){}

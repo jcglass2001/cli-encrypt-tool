@@ -1,4 +1,4 @@
-#include "AlgorithmFactory.hpp"
+#include "algorithm_factory.hpp"
 
 // std::unordered_map<std::string, AlgorithmCreator> AlgorithmFactory::registry;
 

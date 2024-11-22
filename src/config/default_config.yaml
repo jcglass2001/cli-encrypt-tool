@@ -1,0 +1,14 @@
+# Default Configuration of CLI File Encryption Tool
+
+# General Settings
+general:
+  default_algorithm: Caesar
+  input_directory: input_files/
+  output_directory: output_files/
+
+# Algorithm-Specific Settings
+algorithms:
+  caesar:
+    shift: 1
+  xor:
+    key: "default_key"
